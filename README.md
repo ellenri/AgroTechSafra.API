@@ -11,32 +11,27 @@ API para gerenciamento de avaliações de pragas em culturas agrícolas.
 
 ### Passos para Executar
 
-1. **Navegue até a pasta do projeto**
-   ```bash
-   cd D:\Projetos\AgroTechSafra_Clean
-   ```
-
-2. **Restaure os pacotes NuGet**
+1. **Restaure os pacotes NuGet**
    ```bash
    dotnet restore
    ```
 
-3. **Configure o banco de dados**
+2. **Configure o banco de dados**
    - Certifique-se de que o SQL Server está rodando
    - A string de conexão está em `appsettings.json`
 
-4. **Execute as migrações (se necessário)**
+3. **Execute as migrações (se necessário)**
    ```bash
    dotnet ef migrations add InitialCreate
    dotnet ef database update
    ```
 
-5. **Execute a API**
+4. **Execute a API**
    ```bash
    dotnet run
    ```
 
-6. **Acesse o Swagger**
+5. **Acesse o Swagger**
    - Desenvolvimento: `https://localhost:7000/swagger`
    - Ou: `http://localhost:5000/swagger`
 
@@ -70,14 +65,6 @@ AgroTechSafra_Clean/
 └── AgroTechSafra.API.csproj
 ```
 
-## 🔧 Problemas Resolvidos
-
-- ✅ Estrutura de solução corrigida
-- ✅ Dependências de projetos removidas
-- ✅ Entidades integradas ao projeto
-- ✅ DbContext configurado
-- ✅ Controllers funcionais
-- ✅ Swagger configurado
 
 ## 📦 Pacotes Utilizados
 
