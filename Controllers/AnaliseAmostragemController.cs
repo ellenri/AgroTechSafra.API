@@ -8,7 +8,7 @@ using AgroTechSafra.API.Models;
 namespace AgroTechSafra.API.Controllers
 {
     [ApiController]
-    [Route("api/analiseamostragem")]
+    [Route("api/analiseamostragem/upload")]
     public class AnaliseAmostragemController : ControllerBase
     {
         [HttpPost]
