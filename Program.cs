@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using AgroTechSafra.API.Data;
+using AgroTechSafra.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,11 +8,29 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AgroTechSafraContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Registrar serviços de IA
+builder.Services.AddScoped<IAnaliseIAService, AnaliseIAService>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { 
+        Title = "AgroTech Safra API", 
+        Version = "v1",
+        Description = "API para análise de pragas agrícolas com Inteligência Artificial"
+    });
+    
+    //// Configurar upload de arquivos no Swagger
+    //c.EnableAnnotations();
+});
 
+// Configurar upload de arquivos
+builder.Services.Configure<IISServerOptions>(options =>
+{
+    options.MaxRequestBodySize = 10 * 1024 * 1024; // 10MB
+});
 
 // Add CORS
 builder.Services.AddCors(options =>
@@ -57,5 +76,8 @@ app.UseCors("AllowAll");
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Página de boas-vindas
+app.MapGet("/", () => Results.Redirect("/swagger"));
 
 app.Run();
